@@ -16,6 +16,7 @@
 
 package android.hardware.camera2.impl;
 
+import static android.hardware.camera2.CameraAccessException.CAMERA_IN_USE;
 import static com.android.internal.util.function.pooled.PooledLambda.obtainRunnable;
 
 import android.app.ActivityThread;
@@ -23,6 +24,8 @@ import android.annotation.NonNull;
 import android.content.Context;
 import android.graphics.ImageFormat;
 import android.hardware.ICameraService;
+import android.app.ActivityThread;
+import android.graphics.ImageFormat;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraCharacteristics;
@@ -1573,6 +1576,15 @@ public class CameraDeviceImpl extends CameraDevice
         if (inputConfig.isMultiResolution()) {
             MultiResolutionStreamConfigurationMap configMap = mCharacteristics.get(
                     CameraCharacteristics.SCALER_MULTI_RESOLUTION_STREAM_CONFIGURATION_MAP);
+
+            /*
+             * don't check input format and size,
+             * if the package name is in the white list
+             */
+            if (isPrivilegedApp()) {
+                Log.w(TAG, "ignore input format/size check for white listed app");
+                return;
+            }
 
             int[] inputFormats = configMap.getInputFormats();
             boolean validFormat = false;
