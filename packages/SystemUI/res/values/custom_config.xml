@@ -38,4 +38,7 @@
 
     <!-- StatusBar burn-in protection -->
     <bool name="config_disableStatusBarBurnInProtection">false</bool>
+
+    <!-- Allow devices override show 4G instead of LTE -->
+    <bool name="config_showFourG">false</bool>
 </resources>
