@@ -16,5 +16,7 @@
     <string name="qs_data_switch_text_2">SIM 卡 2</string>
     <string name="qs_data_switch_changed_1">设置卡 1 为数据卡</string>
     <string name="qs_data_switch_changed_2">设置卡 2 为数据卡</string>
+    <string name="status_bar_show_fourg_title">4G 图标</string>
+    <string name="status_bar_show_fourg_summary">在信号图标中显示 4G 图标而不是 LTE</string>
 
 </resources>
