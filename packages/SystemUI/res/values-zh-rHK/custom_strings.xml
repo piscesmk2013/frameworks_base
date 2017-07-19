@@ -14,5 +14,7 @@
     <string name="qs_data_switch_toast_1">當前僅插入一張 SIM 卡</string>
     <string name="qs_data_switch_changed_1">設置卡 1 為數據卡</string>
     <string name="qs_data_switch_changed_2">設置卡 2 為數據卡</string>
+    <string name="status_bar_show_fourg_title">4G 圖標</string>
+    <string name="status_bar_show_fourg_summary">在信號圖標中顯示 4G 圖標而不是 LTE</string>
 
 </resources>
