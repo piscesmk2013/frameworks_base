@@ -106,7 +106,8 @@ import kotlin.Unit;
 /** Platform implementation of the network controller. **/
 @SysUISingleton
 public class NetworkControllerImpl extends BroadcastReceiver
-        implements NetworkController, DemoMode, DataUsageController.NetworkNameProvider, Dumpable {
+        implements NetworkController, DemoMode, DataUsageController.NetworkNameProvider,
+        Dumpable, UserTracker.Callback {
     // debug
     static final String TAG = "NetworkController";
     static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
@@ -215,14 +216,6 @@ public class NetworkControllerImpl extends BroadcastReceiver
                 }
             };
 
-    private final UserTracker.Callback mUserChangedCallback =
-            new UserTracker.Callback() {
-                @Override
-                public void onUserChanged(int newUser, @NonNull Context userContext) {
-                    NetworkControllerImpl.this.onUserSwitched(newUser);
-                }
-            };
-
     /**
      * Construct this controller object and register for updates.
      */
@@ -323,6 +316,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
         mCarrierConfigTracker = carrierConfigTracker;
         mDumpManager = dumpManager;
         mLogBuffer = logBuffer;
+        mUserTracker = userTracker;
 
         // telephony
         mPhone = telephonyManager;
@@ -351,9 +345,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
 
         // AIRPLANE_MODE_CHANGED is sent at boot; we've probably already missed it
         updateAirplaneMode(true /* force callback */);
-        mUserTracker = userTracker;
-        mUserTracker.addCallback(mUserChangedCallback, new HandlerExecutor(mMainHandler));
-
+        mUserTracker.addCallback(this, (r) -> { r.run(); });
         deviceProvisionedController.addCallback(new DeviceProvisionedListener() {
             @Override
             public void onUserSetupChanged() {
@@ -763,9 +755,10 @@ public class NetworkControllerImpl extends BroadcastReceiver
         }.execute();
     }
 
-    private void onUserSwitched(int newUserId) {
-        mCurrentUserId = newUserId;
-        mAccessPoints.onUserSwitched(newUserId);
+    @Override
+    public void onUserChanged(int newUser, Context userContext) {
+        mCurrentUserId = newUser;
+        mAccessPoints.onUserSwitched(newUser);
         updateConnectivity();
     }
 
@@ -994,7 +987,8 @@ public class NetworkControllerImpl extends BroadcastReceiver
                         this,
                         subscriptions.get(i),
                         mSubDefaults,
-                        mReceiverHandler.getLooper()
+                        mReceiverHandler.getLooper(),
+                        mUserTracker
                 );
                 controller.setUserSetupComplete(mUserSetup);
                 mMobileSignalControllers.put(subId, controller);
@@ -1476,7 +1470,8 @@ public class NetworkControllerImpl extends BroadcastReceiver
                 this,
                 info,
                 mSubDefaults,
-                mReceiverHandler.getLooper()
+                mReceiverHandler.getLooper(),
+                mUserTracker
         );
 
         mMobileSignalControllers.put(id, controller);
