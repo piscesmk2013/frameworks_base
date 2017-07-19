@@ -41,4 +41,8 @@
     <!-- Name of the clock in status bar [CHAR LIMIT=30] -->
     <string name="clock">Clock</string>
 
+    <!-- SysUI tuner labels -->
+    <string name="status_bar_show_fourg_title">4G icon</string>
+    <string name="status_bar_show_fourg_summary">Display 4G icon in signal icon instead LTE</string>
+
 </resources>
