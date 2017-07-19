@@ -40,4 +40,7 @@
     <bool name="config_statusBarBurnInProtection">false</bool>
     <integer name="config_shift_interval">60</integer>
 
+    <!-- Allow devices override show 4G instead of LTE -->
+    <bool name="config_showFourG">false</bool>
+
 </resources>

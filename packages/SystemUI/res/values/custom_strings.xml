@@ -29,4 +29,8 @@
     <string name="qs_data_switch_changed_1">Switched data card to SIM 1.</string>
     <string name="qs_data_switch_changed_2">Switched data card to SIM 2.</string>
 
+    <!-- SysUI tuner labels -->
+    <string name="status_bar_show_fourg_title">4G icon</string>
+    <string name="status_bar_show_fourg_summary">Display 4G icon in signal icon instead LTE</string>
+
 </resources>
