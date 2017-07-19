@@ -23,5 +23,7 @@
     <string name="global_action_reboot_bootloader">Bootloader</string>
     <string name="global_action_settings">设置</string>
     <string name="clock">时钟</string>
+    <string name="status_bar_show_fourg_title">4G 图标</string>
+    <string name="status_bar_show_fourg_summary">在信号图标中显示 4G 图标而不是 LTE</string>
 
 </resources>
