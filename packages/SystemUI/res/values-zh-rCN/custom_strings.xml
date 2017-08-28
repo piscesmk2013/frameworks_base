@@ -8,4 +8,10 @@
     <string name="qs_data_switch_changed_1">设置卡 1 为数据卡</string>
     <string name="qs_data_switch_changed_2">设置卡 2 为数据卡</string>
     <string name="status_bar_icons">状态栏图标</string>
+    <string name="global_action_reboot">重启</string>
+    <string name="global_action_reboot_more">重启至\u2026</string>
+    <string name="global_action_reboot_sub">系统</string>
+    <string name="global_action_reboot_recovery">Recovery</string>
+    <string name="global_action_reboot_bootloader">Bootloader</string>
+    <string name="global_action_settings">设置</string>
 </resources>

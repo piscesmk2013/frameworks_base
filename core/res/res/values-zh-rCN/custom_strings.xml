@@ -3,4 +3,10 @@
     <string name="optimized_charge_notification_channel_label">充电优化</string>
     <string name="optimized_charge_notification_title">充电已暂停</string>
     <string name="optimized_charge_notification_text">因充电优化策略，充电已暂停</string>
+    <string name="reboot_to_bootloader_title">引导模式</string>
+    <string name="reboot_to_bootloader_message">重启到引导模式\u2026</string>
+    <string name="reboot_to_recovery_title">恢复模式</string>
+    <string name="reboot_to_recovery_message">重启到恢复模式\u2026</string>
+    <string name="reboot_system_title">重启系统</string>
+    <string name="reboot_system_message">重启到系统\u2026</string>
 </resources>
