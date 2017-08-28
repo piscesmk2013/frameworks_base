@@ -5,4 +5,10 @@
     <string name="qs_data_switch_toast_1">當前僅插入一張 SIM 卡</string>
     <string name="qs_data_switch_changed_1">設置卡 1 為數據卡</string>
     <string name="qs_data_switch_changed_2">設置卡 2 為數據卡</string>
+    <string name="global_action_reboot">重啟</string>
+    <string name="global_action_reboot_more">重啟為…</string>
+    <string name="global_action_reboot_sub">系統</string>
+    <string name="global_action_reboot_recovery">Recovery</string>
+    <string name="global_action_reboot_bootloader">Bootloader</string>
+    <string name="global_action_settings">設置</string>
 </resources>
