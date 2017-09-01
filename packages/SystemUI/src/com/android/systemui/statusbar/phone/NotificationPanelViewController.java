@@ -88,6 +88,7 @@ import android.transition.TransitionManager;
 import android.util.IndentingPrintWriter;
 import android.util.Log;
 import android.util.MathUtils;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -117,6 +118,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.policy.ScreenDecorationsUtils;
 import com.android.internal.policy.SystemBarUtils;
 import com.android.internal.util.LatencyTracker;
+import com.android.internal.util.custom.CustomUtils;
 import com.android.keyguard.ActiveUnlockConfig;
 import com.android.keyguard.KeyguardStatusView;
 import com.android.keyguard.KeyguardStatusViewController;
@@ -383,6 +385,9 @@ public class NotificationPanelViewController extends PanelViewController {
     private int mTrackingPointer;
     private VelocityTracker mQsVelocityTracker;
     private boolean mQsTracking;
+
+    private final GestureDetector mLockscreenDoubleTapToSleep;
+    private boolean mIsLockscreenDoubleTapEnabled;
 
     /**
      * If set, the ongoing touch gesture might both trigger the expansion in {@link PanelView} and
@@ -947,6 +952,16 @@ public class NotificationPanelViewController extends PanelViewController {
 
         mQsFrameTranslateController = qsFrameTranslateController;
         updateUserSwitcherFlags();
+
+        mLockscreenDoubleTapToSleep = new GestureDetector(context,
+                new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onDoubleTap(MotionEvent e) {
+                CustomUtils.switchScreenOff(context);
+                return true;
+            }
+        });
+
         onFinishInflate();
         mUseCombinedQSHeaders = featureFlags.isEnabled(Flags.COMBINED_QS_HEADERS);
         mAppExceptions = mResources.getStringArray(R.array.app_exceptions);
@@ -4188,6 +4203,10 @@ public class NotificationPanelViewController extends PanelViewController {
         return mView.getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 
+	public void setLockscreenDoubleTapToSleep(boolean isDoubleTapEnabled) {
+        mIsLockscreenDoubleTapEnabled = isDoubleTapEnabled;
+    }
+
     public void setAlpha(float alpha) {
         mView.setAlpha(alpha);
     }
@@ -4318,6 +4337,12 @@ public class NotificationPanelViewController extends PanelViewController {
                 if (mLastEventSynthesizedDown && event.getAction() == MotionEvent.ACTION_UP) {
                     expand(true /* animate */);
                 }
+
+                if (mIsLockscreenDoubleTapEnabled && !mPulsing && !mDozing
+                        && mStatusBarState == StatusBarState.KEYGUARD) {
+                    mLockscreenDoubleTapToSleep.onTouchEvent(event);
+                }
+
                 initDownStates(event);
 
                 // If pulse is expanding already, let's give it the touch. There are situations
