@@ -17170,6 +17170,18 @@ public final class Settings {
          * @hide
          */
         public static final String FORCE_BACKGROUND_FREEZER = "force_background_freezer";
+
+        /**
+         * Enable blocking wakelock
+         * @hide
+         */
+        public static final String WAKELOCK_BLOCKING_ENABLED = "wakelock_blocking_enabled";
+
+         /**
+         * List of wakelock blocks selected
+         * @hide
+         */
+        public static final String WAKELOCK_BLOCKING_LIST = "wakelock_blocking_list";
     }
 
     /**
