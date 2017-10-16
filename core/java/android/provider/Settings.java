@@ -6071,6 +6071,12 @@ public final class Settings {
         public static final String CUSTOM_RINGTONE_VIBRATION_PATTERN = "custom_ringtone_vibration_pattern";
 
         /**
+         * Statusbar brightness control
+         * @hide
+         */
+        public static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
+
+        /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate
@@ -6253,6 +6259,7 @@ public final class Settings {
             PUBLIC_SETTINGS.add(SHOW_WEB_SUGGESTIONS);
             PUBLIC_SETTINGS.add(VIBRATE_WHEN_RINGING);
             PUBLIC_SETTINGS.add(APPLY_RAMPING_RINGER);
+            PUBLIC_SETTINGS.add(STATUS_BAR_BRIGHTNESS_CONTROL);
         }
 
         /**
