@@ -7,4 +7,5 @@
     <string name="qs_data_switch_text_2">SIM 卡 2</string>
     <string name="qs_data_switch_changed_1">设置卡 1 为数据卡</string>
     <string name="qs_data_switch_changed_2">设置卡 2 为数据卡</string>
+    <string name="status_bar_icons">状态栏图标</string>
 </resources>
