@@ -20,5 +20,6 @@
     <string name="global_action_reboot_recovery">Recovery</string>
     <string name="global_action_reboot_bootloader">Bootloader</string>
     <string name="global_action_settings">設置</string>
+    <string name="clock">時鐘</string>
 
 </resources>
