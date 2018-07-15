@@ -5834,6 +5834,15 @@ public final class Settings {
         public static final String CUSTOM_RINGTONE_VIBRATION_PATTERN = "custom_ringtone_vibration_pattern";
 
         /**
+         * Statusbar clock position
+         * 0 - right
+         * 1 - center
+         * 2 - left (default)
+         * @hide
+         */
+        public static final String STATUS_BAR_CLOCK = "status_bar_clock";
+
+        /**
          * These are all public system settings
          *
          * @hide
