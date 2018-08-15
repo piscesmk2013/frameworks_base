@@ -37,4 +37,7 @@
     <!-- Allow devices override show 4G instead of LTE -->
     <bool name="config_showFourG">false</bool>
 
+    <!-- The default tiles to display in QuickSettings -->
+    <string name="quick_settings_tiles_extra" translatable="false"></string>
+
 </resources>
