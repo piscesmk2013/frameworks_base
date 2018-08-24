@@ -136,7 +136,8 @@ public class NotificationIconContainer extends ViewGroup {
         }
     }.setDuration(CONTENT_FADE_DURATION);
 
-    private static final int MAX_ICONS_ON_AOD = 3;
+    private final int MAX_ICONS_ON_AOD =
+            getResources().getInteger(R.integer.config_maxVisibleNotificationIconsOnLock);
 
     /* Maximum number of icons in short shelf on lockscreen when also showing overflow dot. */
     public final int MAX_ICONS_ON_LOCKSCREEN = getResources().getInteger(R.integer.config_maxVisibleNotificationIconsOnLock);
