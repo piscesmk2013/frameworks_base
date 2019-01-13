@@ -243,5 +243,7 @@ public class SystemSettingsValidators {
                         return new InclusiveIntegerRangeValidator(0, 1000).validate(item);
                     }
                 });
+        VALIDATORS.put(System.NETWORK_TRAFFIC_STATE, BOOLEAN_VALIDATOR);
+        VALIDATORS.put(System.NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD, ANY_INTEGER_VALIDATOR);
     }
 }
