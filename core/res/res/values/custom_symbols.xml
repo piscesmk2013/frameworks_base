@@ -106,4 +106,8 @@
     <!-- Whether device has a big physical display cutout -->
     <java-symbol type="bool" name="config_physicalDisplayCutoutCentered" />
 
+    <!-- Alert slider -->
+    <java-symbol type="bool" name="config_hasAlertSlider" />
+    <java-symbol type="integer" name="config_alertSliderLocation" />
+
 </resources>
