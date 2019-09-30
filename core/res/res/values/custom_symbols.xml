@@ -57,4 +57,8 @@
     <!-- Display color inversion availability -->
     <java-symbol type="bool" name="config_displayInversionAvailable" />
 
+    <!-- Alert slider -->
+    <java-symbol type="bool" name="config_hasAlertSlider" />
+    <java-symbol type="integer" name="config_alertSliderLocation" />
+
 </resources>
