@@ -109,4 +109,8 @@
     <!-- Ignore post running notifications for selected apps -->
     <java-symbol type="array" name="config_postNotificationIgnoredApps" />
 
+    <!-- Alert slider -->
+    <java-symbol type="bool" name="config_hasAlertSlider" />
+    <java-symbol type="integer" name="config_alertSliderLocation" />
+
 </resources>
