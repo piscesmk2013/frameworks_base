@@ -94,5 +94,6 @@ public class SystemSettings {
         Settings.System.RINGTONE_VIBRATION_PATTERN,
         Settings.System.CUSTOM_RINGTONE_VIBRATION_PATTERN,
         Settings.System.SHOW_FOURG_ICON,
+        Settings.System.DOZE_ON_CHARGE,
     };
 }
