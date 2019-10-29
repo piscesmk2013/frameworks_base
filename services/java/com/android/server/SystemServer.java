@@ -155,6 +155,8 @@ import com.android.server.os.SchedulingPolicyService;
 import com.android.server.people.PeopleService;
 import com.android.server.pm.ApexManager;
 import com.android.server.pm.ApexSystemServiceInfo;
+import com.android.server.pocket.PocketService;
+import com.android.server.pocket.PocketBridgeService;
 import com.android.server.pm.CrossProfileAppsService;
 import com.android.server.pm.DataLoaderManagerService;
 import com.android.server.pm.DynamicCodeLoggingService;
@@ -1688,6 +1690,7 @@ public final class SystemServer implements Dumpable {
         // Before things start rolling, be sure we have decided whether
         // we are in safe mode.
         final boolean safeMode = wm.detectSafeMode();
+
         if (safeMode) {
             // If yes, immediately turn on the global setting for airplane mode.
             // Note that this does not send broadcasts at this stage because
@@ -2532,6 +2535,10 @@ public final class SystemServer implements Dumpable {
             mSystemServiceManager.startService(LinearmotorVibratorService.class);
             t.traceEnd();
 
+            t.traceBegin("StartPocketService");
+            mSystemServiceManager.startService(PocketService.class);
+            t.traceEnd();
+
             // LineageHardware
             if (!mOnlyCore){
                 t.traceBegin("StartLineageHardwareService");
@@ -2549,6 +2556,14 @@ public final class SystemServer implements Dumpable {
             if (!mOnlyCore){
                 t.traceBegin("StartLiveDisplayService");
                 mSystemServiceManager.startService(LiveDisplayService.class);
+                t.traceEnd();
+            }
+
+            // PocketJudge
+            if (!context.getResources().getString(
+                    com.android.internal.R.string.config_pocketBridgeSysfsInpocket).isEmpty()) {
+                t.traceBegin("StartPocketBridgeService");
+                mSystemServiceManager.startService(PocketBridgeService.class);
                 t.traceEnd();
             }
             
