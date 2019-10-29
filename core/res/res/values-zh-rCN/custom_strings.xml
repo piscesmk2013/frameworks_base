@@ -4,5 +4,10 @@
     <string name="optimized_charge_notification_channel_label">充电优化</string>
     <string name="optimized_charge_notification_title">充电已暂停</string>
     <string name="optimized_charge_notification_text">因充电优化策略，充电已暂停</string>
+    <string name="pocket_lock_message_long_press">按住电源按键来解锁</string>
+    <string name="pocket_view_title">口袋模式已开启</string>
+    <string name="pocket_view_title_cancel">使用您的手机：</string>
+    <string name="pocket_view_top_tag_cancel">检查手机的蓝色区域是否清除任何障碍物，并清洁任何污垢或灰尘。</string>
+    <string name="pocket_view_top_tag_cancel2">长按电源按钮强制退出口袋模式</string>
 
 </resources>
