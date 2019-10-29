@@ -4,5 +4,10 @@
     <string name="optimized_charge_notification_channel_label">最佳化充電</string>
     <string name="optimized_charge_notification_title">暫停充電</string>
     <string name="optimized_charge_notification_text">由於最佳化充電功能，充電已被暫停</string>
+    <string name="pocket_lock_message_long_press">長按電源按鈕以解鎖</string>
+    <string name="pocket_view_title">防誤觸模式已開啟</string>
+    <string name="pocket_view_title_cancel">若要使用您的手機：</string>
+    <string name="pocket_view_top_tag_cancel">請確保藍色區域上沒有任何遮蔽物，且已清除任何灰塵、粉塵</string>
+    <string name="pocket_view_top_tag_cancel2">長按電源鍵來強制退出防誤觸模式</string>
 
 </resources>
