@@ -9,4 +9,10 @@
     <string name="screen_pinning_description_no_navbar_fpsensor">此功能會固定螢幕顯示直到您取消固定。觸控並長按指紋感測器即可解除固定。</string>
     <string name="screen_pinning_toast_no_navbar_fpsensor">要取消固定，請觸碰並按助指紋感測器以取消。</string>
     <string name="face_unlock_recognizing">識別面部...</string>
+    <string name="qs_data_switch_label">更改數據卡</string>
+    <string name="qs_data_switch_toast_0">當前沒有插入 SIM 卡</string>
+    <string name="qs_data_switch_toast_1">當前僅插入一張 SIM 卡</string>
+    <string name="qs_data_switch_changed_1">設置卡 1 為數據卡</string>
+    <string name="qs_data_switch_changed_2">設置卡 2 為數據卡</string>
+
 </resources>
