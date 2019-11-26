@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="qs_data_switch_label">切換行動數據 SIM 卡</string>
+    <string name="qs_data_switch_toast_0">目前尚未插入SIM卡</string>
+    <string name="qs_data_switch_toast_1">目前僅插入一張SIM卡</string>
+    <string name="qs_data_switch_changed_1">將數據網路切換為 SIM卡1</string>
+    <string name="qs_data_switch_changed_2">將數據網路切換為 SIM卡2</string>
+</resources>
