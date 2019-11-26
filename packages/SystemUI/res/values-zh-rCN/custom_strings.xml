@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="qs_data_switch_label">更改数据卡</string>
+    <string name="qs_data_switch_toast_0">当前没有插入 SIM 卡</string>
+    <string name="qs_data_switch_toast_1">当前仅插入一张 SIM 卡</string>
+    <string name="qs_data_switch_text_1">SIM 卡 1</string>
+    <string name="qs_data_switch_text_2">SIM 卡 2</string>
+    <string name="qs_data_switch_changed_1">设置卡 1 为数据卡</string>
+    <string name="qs_data_switch_changed_2">设置卡 2 为数据卡</string>
+</resources>
