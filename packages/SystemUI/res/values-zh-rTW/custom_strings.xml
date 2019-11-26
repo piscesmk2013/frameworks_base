@@ -9,4 +9,10 @@
     <string name="screen_pinning_description_no_navbar_fpsensor">這會讓目前的螢幕畫面保持顯示狀態，直到取消固定為止。碰觸 &amp; 按住「指紋感應器」即可取消固定。</string>
     <string name="screen_pinning_toast_no_navbar_fpsensor">要取消固定這個畫面，碰觸 &amp; 按住指紋感應器。</string>
     <string name="face_unlock_recognizing">臉部辨識中...</string>
+    <string name="qs_data_switch_label">切換行動數據 SIM 卡</string>
+    <string name="qs_data_switch_toast_0">目前尚未插入SIM卡</string>
+    <string name="qs_data_switch_toast_1">目前僅插入一張SIM卡</string>
+    <string name="qs_data_switch_changed_1">將數據網路切換為 SIM卡1</string>
+    <string name="qs_data_switch_changed_2">將數據網路切換為 SIM卡2</string>
+
 </resources>
