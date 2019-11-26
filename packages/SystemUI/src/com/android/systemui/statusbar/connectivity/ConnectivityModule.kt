@@ -21,6 +21,7 @@ import com.android.systemui.qs.tiles.AirplaneModeTile
 import com.android.systemui.qs.tiles.BluetoothTile
 import com.android.systemui.qs.tiles.CastTile
 import com.android.systemui.qs.tiles.DataSaverTile
+import com.android.systemui.qs.tiles.DataSwitchTile
 import com.android.systemui.qs.tiles.HotspotTile
 import com.android.systemui.qs.tiles.InternetTile
 import com.android.systemui.qs.tiles.NfcTile
@@ -70,4 +71,10 @@ interface ConnectivityModule {
 
     /** Inject NfcTile into tileMap in QSModule */
     @Binds @IntoMap @StringKey(NfcTile.TILE_SPEC) fun bindNfcTile(nfcTile: NfcTile): QSTileImpl<*>
+
+    /** Inject DataSwitchTile into tileMap in QSModule */
+    @Binds
+    @IntoMap
+    @StringKey(DataSwitchTile.TILE_SPEC)
+    fun bindDataSwitchTile(dataSwitchTile: DataSwitchTile): QSTileImpl<*>
 }
