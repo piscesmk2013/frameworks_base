@@ -3,5 +3,7 @@
     <string name="tap_to_add_tiles">点按即可添加/删除图块</string>
     <string name="screenrecord_delete_label">删除</string>
     <string name="screenrecord_delete_description">屏幕录制已删除</string>
+    <string name="screenshot_delete_label">删除</string>
+    <string name="screenshot_delete_description">删除截图</string>
 
 </resources>
