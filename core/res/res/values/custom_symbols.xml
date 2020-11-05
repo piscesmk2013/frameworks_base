@@ -120,4 +120,7 @@
     <java-symbol type="string" name="optimized_charge_notification_title" />
     <java-symbol type="string" name="optimized_charge_notification_text" />
 
+    <!-- Horizon Light -->
+    <java-symbol type="integer" name="config_AmbientPulseLightColor" />
+
 </resources>
