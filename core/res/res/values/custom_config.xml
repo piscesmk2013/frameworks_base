@@ -235,4 +235,7 @@
 
     <!-- Display color inversion availability -->
     <bool name="config_displayInversionAvailable">true</bool>
+
+    <!-- Default value for Horizon light color (Blue) -->
+    <integer name="config_AmbientPulseLightColor">0x3980FF</integer>
 </resources>
