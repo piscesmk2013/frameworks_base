@@ -359,4 +359,16 @@ public class AmbientDisplayConfiguration {
     private void putDozeSetting(String name, String value, int userId) {
         Settings.Secure.putStringForUser(mContext.getContentResolver(), name, value, userId);
     }
+
+    /** {@hide} */
+    public boolean doubleTapAmbient(int user) {
+        return Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.DOUBLE_TAP_AMBIENT_WAKE_GESTURES, 0, user) != 0;
+    }
+
+    /** {@hide} */
+    public boolean pickupAmbient(int user) {
+        return Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.PICKUP_AMBIENT_WAKE_GESTURES, 0, user) != 0;
+    }
 }

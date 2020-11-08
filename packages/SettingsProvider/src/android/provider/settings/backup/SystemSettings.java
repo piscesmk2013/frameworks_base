@@ -93,5 +93,7 @@ public class SystemSettings {
         Settings.System.CUSTOM_RINGTONE_VIBRATION_PATTERN,
         Settings.System.SHOW_FOURG_ICON,
         Settings.System.DOZE_ON_CHARGE,
+        Settings.System.DOUBLE_TAP_AMBIENT_WAKE_GESTURES,
+        Settings.System.PICKUP_AMBIENT_WAKE_GESTURES,
     };
 }
