@@ -5955,6 +5955,22 @@ public final class Settings {
         public static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
 
         /**
+         * Whether to show ambient instead of lockscreen during dt2w
+         *
+         * @hide
+         */
+        @Readable
+        public static final String DOUBLE_TAP_AMBIENT_WAKE_GESTURES = "double_tap_ambient_wake_gestures";
+
+        /**
+         * Whether to show ambient instead of lockscreen during pickup
+         *
+         * @hide
+         */
+        @Readable
+        public static final String PICKUP_AMBIENT_WAKE_GESTURES = "pickup_ambient_wake_gestures";
+
+        /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate
@@ -6103,6 +6119,8 @@ public final class Settings {
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_FONT_SIZE);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_VIEW_LOCATION);
             PRIVATE_SETTINGS.add(AUTO_BRIGHTNESS_ONE_SHOT);
+            PRIVATE_SETTINGS.add(DOUBLE_TAP_AMBIENT_WAKE_GESTURES);
+            PRIVATE_SETTINGS.add(PICKUP_AMBIENT_WAKE_GESTURES);
         }
 
         /**
