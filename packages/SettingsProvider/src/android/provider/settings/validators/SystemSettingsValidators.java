@@ -317,5 +317,7 @@ public class SystemSettingsValidators {
                     }
                 });
         VALIDATORS.put(System.SHOW_APP_VOLUME, BOOLEAN_VALIDATOR);
+        VALIDATORS.put(System.DOUBLE_TAP_AMBIENT_WAKE_GESTURES, BOOLEAN_VALIDATOR);
+        VALIDATORS.put(System.PICKUP_AMBIENT_WAKE_GESTURES, BOOLEAN_VALIDATOR);
     }
 }
