@@ -4,5 +4,9 @@
     <string name="optimized_charge_notification_channel_label">充电优化</string>
     <string name="optimized_charge_notification_title">充电已暂停</string>
     <string name="optimized_charge_notification_text">因充电优化策略，充电已暂停</string>
-
+    <string name="notification_channel_sleep">睡眠模式</string>
+    <string name="sleep_mode_notification_title">睡眠模式已启用</string>
+    <string name="sleep_mode_notification_content">点击关闭睡眠模式</string>
+    <string name="sleep_mode_enabled_toast">睡眠模式已开启</string>
+    <string name="sleep_mode_disabled_toast">睡眠模式已关闭</string>
 </resources>
