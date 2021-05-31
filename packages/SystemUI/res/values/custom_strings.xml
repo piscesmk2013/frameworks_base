@@ -33,4 +33,7 @@
     <string name="status_bar_show_fourg_title">4G icon</string>
     <string name="status_bar_show_fourg_summary">Display 4G icon in signal icon instead LTE</string>
 
+    <!-- Sleep Mode -->
+    <string name="quick_settings_sleep_mode_label">Sleep Mode</string>
+
 </resources>
