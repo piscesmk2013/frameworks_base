@@ -46,7 +46,7 @@ import com.android.systemui.statusbar.policy.LocationController.LocationChangeCa
 import javax.inject.Inject;
 
 /** Quick settings tile: Location **/
-public class LocationTile extends QSTileImpl<BooleanState> {
+public class LocationTile extends SecureQSTile<BooleanState> {
 
     public static final String TILE_SPEC = "location";
 
@@ -68,7 +68,7 @@ public class LocationTile extends QSTileImpl<BooleanState> {
             KeyguardStateController keyguardStateController
     ) {
         super(host, backgroundLooper, mainHandler, falsingManager, metricsLogger,
-                statusBarStateController, activityStarter, qsLogger);
+                statusBarStateController, activityStarter, qsLogger, keyguardStateController);
         mController = locationController;
         mKeyguard = keyguardStateController;
         mController.observe(this, mCallback);
@@ -86,7 +86,11 @@ public class LocationTile extends QSTileImpl<BooleanState> {
     }
 
     @Override
-    protected void handleClick(@Nullable View view) {
+    protected void handleClick(@Nullable View view, boolean keyguardShowing) {
+        if (checkKeyguard(view, keyguardShowing)) {
+            return;
+        }
+
         if (mKeyguard.isMethodSecure() && mKeyguard.isShowing()) {
             mActivityStarter.postQSRunnableDismissingKeyguard(() -> {
                 final boolean wasEnabled = mState.value;

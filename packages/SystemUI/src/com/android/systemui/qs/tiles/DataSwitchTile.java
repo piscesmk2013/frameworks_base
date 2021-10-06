@@ -57,7 +57,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class DataSwitchTile extends QSTileImpl<BooleanState> {
+public class DataSwitchTile extends SecureQSTile<BooleanState> {
 
     public static final String TILE_SPEC = "dataswitch";
 
@@ -98,7 +98,7 @@ public class DataSwitchTile extends QSTileImpl<BooleanState> {
             KeyguardStateController keyguardStateController
     ) {
         super(host, backgroundLooper, mainHandler, falsingManager, metricsLogger,
-                statusBarStateController, activityStarter, qsLogger);
+                statusBarStateController, activityStarter, qsLogger, keyguardStateController);
         mSubscriptionManager = SubscriptionManager.from(host.getContext());
         mTelephonyManager = TelephonyManager.from(host.getContext());
     }
@@ -153,7 +153,11 @@ public class DataSwitchTile extends QSTileImpl<BooleanState> {
     }
 
     @Override
-    protected void handleClick(@Nullable View view) {
+    protected void handleClick(@Nullable View view, boolean keyguardShowing) {
+        if (checkKeyguard(view, keyguardShowing)) {
+            return;
+        }
+
         if (!mCanSwitch) {
             Log.d(TAG, "Call state=" + mTelephonyManager.getCallState());
         } else if (mSimCount == 0) {
