@@ -60,6 +60,10 @@ public class PixelPropsUtils {
             createGoogleSpoofProps("barbet", "Pixel 5a",
                     "google/barbet/barbet:14/UP1A.231005.007/10754064:user/release-keys");
 
+    private static final Map<String, Object> propsToChangePixelXL =
+            createGoogleSpoofProps("marlin", "Pixel XL",
+                    "google/marlin/marlin:10/QP1A.191005.007.A3/5972272:user/release-keys");
+
     private static final Map<String, ArrayList<String>> propsToKeep;
 
     private static final String[] packagesToChangePixel8Pro = {
@@ -237,7 +241,10 @@ public class PixelPropsUtils {
                 || Arrays.asList(extraPackagesToChange).contains(packageName)) {
 
             boolean isPixelDevice = Arrays.asList(pixelCodenames).contains(SystemProperties.get(DEVICE));
-            if (isPixelDevice) {
+
+            if (packageName.equals("com.google.android.apps.photos")) {
+                propsToChange.putAll(propsToChangePixelXL);
+            } else if (isPixelDevice) {
                 return;
             } else {
                 if (Arrays.asList(packagesToChangePixel8Pro).contains(packageName)) {
