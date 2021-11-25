@@ -253,5 +253,6 @@ public class SystemSettingsValidators {
                     }
                 });
         VALIDATORS.put(System.SHOW_FOURG_ICON, BOOLEAN_VALIDATOR);
+        VALIDATORS.put(System.FULLSCREEN_GESTURES, BOOLEAN_VALIDATOR);
     }
 }
