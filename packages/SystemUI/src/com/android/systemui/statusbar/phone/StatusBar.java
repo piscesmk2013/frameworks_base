@@ -136,6 +136,7 @@ import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.keyguard.ViewMediatorCallback;
 import com.android.systemui.ActivityIntentHelper;
+import com.android.systemui.ArcaneIdleManager;
 import com.android.systemui.AutoReinflateContainer;
 import com.android.systemui.DejankUtils;
 import com.android.systemui.EventLogTags;
@@ -550,6 +551,9 @@ public class StatusBar extends SystemUI implements
     // expanded notifications
     // the sliding/resizing panel within the notification window
     protected NotificationPanelViewController mNotificationPanelViewController;
+
+   // Arcane Idle
+    private boolean isIdleManagerIstantiated = false;
 
     // settings
     private QSPanelController mQSPanelController;
@@ -3771,6 +3775,17 @@ public class StatusBar extends SystemUI implements
             }
 
             DejankUtils.stopDetectingBlockingIpcs(tag);
+            if (Settings.System.getIntForUser(mContext.getContentResolver(),
+                                              Settings.System.ARCANE_IDLE_MANAGER, 1,
+                                              mLockscreenUserManager.getCurrentUserId()) == 1) {
+                if (!isIdleManagerIstantiated) {
+                    ArcaneIdleManager.initManager(mContext);
+                    isIdleManagerIstantiated = true;
+                    ArcaneIdleManager.executeManager();
+                } else {
+                    ArcaneIdleManager.executeManager();
+                }
+            }
         }
 
         @Override
@@ -3798,6 +3813,11 @@ public class StatusBar extends SystemUI implements
             }
 
             DejankUtils.stopDetectingBlockingIpcs(tag);
+            if (Settings.System.getIntForUser(mContext.getContentResolver(),
+                                              Settings.System.ARCANE_IDLE_MANAGER, 1,
+                                              mLockscreenUserManager.getCurrentUserId()) == 1) {
+                ArcaneIdleManager.haltManager();
+            }
         }
 
         @Override
