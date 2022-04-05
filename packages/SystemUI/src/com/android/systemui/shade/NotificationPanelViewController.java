@@ -5156,6 +5156,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             PendingIntent reTickerIntent = row.getEntry().getSbn().getNotification().contentIntent;
             String mergedContentText = reTickerAppName + " " + reTickerContent;
             mReTickerComebackIcon.setImageDrawable(icon);
+            Drawable dw = mView.getContext().getDrawable(R.drawable.reticker_background);
             boolean reTickerColored = Settings.System.getIntForUser(mView.getContext().getContentResolver(),
                     Settings.System.RETICKER_COLORED, 0, UserHandle.USER_CURRENT) != 0;
             if (reTickerColored) {
@@ -5168,11 +5169,13 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                         col = Color.parseColor(mAppExceptions[i+=1]);
                     }
                 }
-                Drawable dw = mView.getContext().getDrawable(R.drawable.reticker_background);
                 dw.setTint(col);
-                mReTickerComeback.setBackground(dw);
+            } else {
+                dw.setTintList(null);
             }
+            mReTickerComeback.setBackground(dw);
             mReTickerContentTV.setText(mergedContentText);
+            mReTickerContentTV.setTextAppearance(mView.getContext(), R.style.TextAppearance_Notifications_reTicker);
             mReTickerContentTV.setSelected(true);
             RetickerAnimations.doBounceAnimationIn(mReTickerComeback);
             mReTickerComeback.setOnClickListener(v -> {
@@ -5205,14 +5208,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         } else {
             mReTickerComeback.getViewTreeObserver().removeOnComputeInternalInsetsListener(mInsetsListener);
         }
-    }
-
-    public void reTickerViewUpdate() {
-        boolean reTickerStatus = Settings.System.getIntForUser(mView.getContext().getContentResolver(),
-                Settings.System.RETICKER_STATUS, 0, UserHandle.USER_CURRENT) != 0;
-        if (reTickerStatus) return;
-        if (mReTickerComeback != null) mReTickerComeback.setBackground(mView.getContext().getDrawable(R.drawable.reticker_background));
-        if (mReTickerContentTV != null) mReTickerContentTV.setTextAppearance(mView.getContext(), R.style.TextAppearance_Notifications_reTicker);
     }
 
     public void reTickerDismissal() {
