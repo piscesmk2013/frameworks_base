@@ -71,7 +71,6 @@ public class CustomUtils {
         private static boolean mLocationState;
         private static boolean mCellularState;
         private static boolean mBluetoothState;
-        private static boolean mSensorState;
         private static int mRingerState;
         private static int mZenState;
         private static int mExtraDarkMode;
@@ -286,7 +285,6 @@ public class CustomUtils {
             final boolean disableSensors = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                     Settings.Secure.SLEEP_MODE_SENSORS_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
             if (disableSensors) {
-                mSensorState = isSensorEnabled();
                 setSensorEnabled(false);
             }
 
@@ -356,8 +354,14 @@ public class CustomUtils {
             // Enable Sensors
             final boolean disableSensors = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                     Settings.Secure.SLEEP_MODE_SENSORS_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
-            if (disableSensors && mSensorState != isSensorEnabled()) {
-                setSensorEnabled(mSensorState);
+            if (disableSensors) {
+                setSensorEnabled(true);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {}
+                if (!isSensorEnabled()) {
+                    setSensorEnabled(true);
+                }
             }
 
             // Disable Extra Dark mode battery
