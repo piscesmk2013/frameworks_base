@@ -55,6 +55,7 @@ import android.app.PendingIntent;
 import android.app.StatusBarManager;
 import android.content.ContentResolver;
 import android.content.res.Resources;
+import android.content.res.Configuration;
 import android.database.ContentObserver;
 import android.graphics.Color;
 import android.graphics.ColorMatrixColorFilter;
@@ -62,6 +63,7 @@ import android.graphics.Insets;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
@@ -637,6 +639,10 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     private ImageView mReTickerComebackIcon;
     private TextView mReTickerContentTV;
     private NotificationStackScrollLayout mNotificationStackScroller;
+
+    private boolean mReTickerStatus;
+    private boolean mReTickerColored;
+    private boolean mReTickerLandscapeOnly;
 
     private final Runnable mMaybeHideExpandedRunnable = () -> {
         if (getExpandedFraction() == 0.0f) {
@@ -3378,6 +3384,10 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         updateMaxDisplayedNotifications(true);
     }
 
+    private boolean isLandscape() {
+        return mView.getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+    }
+
     @Override
     public void resetTranslation() {
         mView.setTranslationX(0f);
@@ -3456,6 +3466,25 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                 /* notifyForDescendants */ false,
                 mSettingsChangeObserver
         );
+        mContentResolver.registerContentObserver(
+                Settings.System.getUriFor(Settings.System.RETICKER_STATUS),
+                /* notifyForDescendants */ false,
+                mSettingsChangeObserver,
+                UserHandle.USER_ALL
+        );
+        mContentResolver.registerContentObserver(
+                Settings.System.getUriFor(Settings.System.RETICKER_COLORED),
+                /* notifyForDescendants */ false,
+                mSettingsChangeObserver,
+                UserHandle.USER_ALL
+        );
+        mContentResolver.registerContentObserver(
+                Settings.System.getUriFor(Settings.System.RETICKER_LANDSCAPE_ONLY),
+                /* notifyForDescendants */ false,
+                mSettingsChangeObserver,
+                UserHandle.USER_ALL
+        );
+        updateReticker();
     }
 
     public void setBlockedGesturalNavigation(boolean blocked) {
@@ -4314,12 +4343,30 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
 
         @Override
-        public void onChange(boolean selfChange) {
+        public void onChange(boolean selfChange, Uri uri) {
             debugLog("onSettingsChanged");
 
-            // Can affect multi-user switcher visibility
-            reInflateViews();
+            if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.RETICKER_STATUS))
+                || uri.equals(Settings.System.getUriFor(
+                    Settings.System.RETICKER_COLORED))
+                || uri.equals(Settings.System.getUriFor(
+                    Settings.System.RETICKER_LANDSCAPE_ONLY))) {
+                updateReticker();
+            } else {
+                // Can affect multi-user switcher visibility
+                reInflateViews();
+            }
         }
+    }
+
+    private void updateReticker() {
+        mReTickerStatus = Settings.System.getIntForUser(mView.getContext().getContentResolver(),
+                Settings.System.RETICKER_STATUS, 0, UserHandle.USER_CURRENT) != 0;
+        mReTickerColored = Settings.System.getIntForUser(mView.getContext().getContentResolver(),
+                Settings.System.RETICKER_COLORED, 0, UserHandle.USER_CURRENT) != 0;
+        mReTickerLandscapeOnly = Settings.System.getIntForUser(mView.getContext().getContentResolver(),
+                Settings.System.RETICKER_LANDSCAPE_ONLY, 0, UserHandle.USER_CURRENT) != 0;
     }
 
     private final class StatusBarStateListener implements StateListener {
@@ -5128,9 +5175,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     /* reTicker */
 
     public void reTickerView(boolean visibility) {
-        boolean reTickerStatus = Settings.System.getIntForUser(mView.getContext().getContentResolver(),
-                Settings.System.RETICKER_STATUS, 0, UserHandle.USER_CURRENT) != 0;
-        if (!reTickerStatus) return;
+        if (!mReTickerStatus || mReTickerLandscapeOnly && !isLandscape()) return;
         if (visibility && mReTickerComeback.getVisibility() == View.VISIBLE) {
             reTickerDismissal();
         }
@@ -5157,9 +5202,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             String mergedContentText = reTickerAppName + " " + reTickerContent;
             mReTickerComebackIcon.setImageDrawable(icon);
             Drawable dw = mView.getContext().getDrawable(R.drawable.reticker_background);
-            boolean reTickerColored = Settings.System.getIntForUser(mView.getContext().getContentResolver(),
-                    Settings.System.RETICKER_COLORED, 0, UserHandle.USER_CURRENT) != 0;
-            if (reTickerColored) {
+            if (mReTickerColored) {
                 int col;
                 col = row.getEntry().getSbn().getNotification().color;
                 mAppExceptions = mView.getContext().getResources().getStringArray(R.array.app_exceptions);
@@ -5195,9 +5238,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     }
 
     protected void reTickerViewVisibility() {
-        boolean reTickerStatus = Settings.System.getIntForUser(mView.getContext().getContentResolver(),
-                Settings.System.RETICKER_STATUS, 0, UserHandle.USER_CURRENT) != 0;
-        if (!reTickerStatus) {
+        if (!mReTickerStatus || mReTickerLandscapeOnly && !isLandscape()) {
             reTickerDismissal();
             return;
         }
