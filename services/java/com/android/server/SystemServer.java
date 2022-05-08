@@ -230,6 +230,8 @@ import com.android.server.lineage.health.HealthInterfaceService;
 
 import dalvik.system.VMRuntime;
 
+import ink.aosp.server.OptimizedChargeService;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -437,6 +439,8 @@ public final class SystemServer implements Dumpable {
                     + "OnDevicePersonalizationSystemService$Lifecycle";
     private static final String UPDATABLE_DEVICE_CONFIG_SERVICE_CLASS =
             "com.android.server.deviceconfig.DeviceConfigInit$Lifecycle";
+    private static final String OPTIMIZED_CHARGE_SERVICE_CLASS =
+            "ink.aosp.server.OptimizedChargeService";
 
     private static final String TETHERING_CONNECTOR_CLASS = "android.net.ITetheringConnector";
 
@@ -2878,6 +2882,10 @@ public final class SystemServer implements Dumpable {
 
         t.traceBegin("HealthConnectManagerService");
         mSystemServiceManager.startService(HEALTHCONNECT_MANAGER_SERVICE_CLASS);
+        t.traceEnd();
+
+        t.traceBegin("StartOptimizedChargeService");
+        mSystemServiceManager.startService(OPTIMIZED_CHARGE_SERVICE_CLASS);
         t.traceEnd();
 
         // These are needed to propagate to the runnable below.

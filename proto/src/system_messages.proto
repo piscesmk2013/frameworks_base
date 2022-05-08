@@ -404,5 +404,9 @@ message SystemMessage {
 
     // Notify the user that audio was lowered based on Calculated Sound Dose (CSD)
     NOTE_CSD_LOWER_AUDIO = 1007;
+
+    // Notify the user about optimized charge status.
+    // package: android
+    NOTE_OPTIMIZED_CHARGE = 2000;
   }
 }
