@@ -113,4 +113,9 @@
     <!-- Alert slider -->
     <java-symbol type="bool" name="config_hasAlertSlider" />
     <java-symbol type="integer" name="config_alertSliderLocation" />
+
+    <!-- Optimized charge notification -->
+    <java-symbol type="string" name="optimized_charge_notification_channel_label" />
+    <java-symbol type="string" name="optimized_charge_notification_title" />
+    <java-symbol type="string" name="optimized_charge_notification_text" />
 </resources>
