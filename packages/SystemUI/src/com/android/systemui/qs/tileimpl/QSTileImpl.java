@@ -35,9 +35,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.metrics.LogMaker;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.text.format.DateUtils;
 import android.util.ArraySet;
 import android.util.Log;
@@ -151,6 +154,8 @@ public abstract class QSTileImpl<TState extends State> implements QSTile, Lifecy
      */
     abstract protected void handleUpdateState(TState state, Object arg);
 
+    protected Vibrator mVibrator;
+
     /**
      * Declare the category of this tile.
      *
@@ -199,6 +204,8 @@ public abstract class QSTileImpl<TState extends State> implements QSTile, Lifecy
 
         resetStates();
         mUiHandler.post(() -> mLifecycle.setCurrentState(CREATED));
+
+        mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
     }
 
     protected final void resetStates() {
@@ -277,6 +284,15 @@ public abstract class QSTileImpl<TState extends State> implements QSTile, Lifecy
 
     // safe to call from any thread
 
+    public void vibrateTick() {
+        if (mVibrator != null) {
+            if (mVibrator.hasVibrator()) {
+                AsyncTask.execute(() ->
+                        mVibrator.vibrate(VibrationEffect.get(VibrationEffect.EFFECT_TICK)));
+            }
+        }
+    }
+
     public void addCallback(Callback callback) {
         mHandler.obtainMessage(H.ADD_CALLBACK, callback).sendToTarget();
     }
@@ -299,6 +315,7 @@ public abstract class QSTileImpl<TState extends State> implements QSTile, Lifecy
         if (!mFalsingManager.isFalseTap(FalsingManager.LOW_PENALTY)) {
             mHandler.obtainMessage(H.CLICK, view).sendToTarget();
         }
+        vibrateTick();
     }
 
     public void secondaryClick(@Nullable View view) {
