@@ -30,6 +30,7 @@ import com.android.systemui.qs.tiles.CastTile;
 import com.android.systemui.qs.tiles.CellularTile;
 import com.android.systemui.qs.tiles.ColorInversionTile;
 import com.android.systemui.qs.tiles.DataSaverTile;
+import com.android.systemui.qs.tiles.DataSwitchTile;
 import com.android.systemui.qs.tiles.DeviceControlsTile;
 import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.qs.tiles.FlashlightTile;
@@ -117,7 +118,8 @@ public class QSFactoryImplGoogle extends QSFactoryImpl {
             Provider<LiveDisplayTile> liveDisplayTileProvider,
             Provider<ReadingModeTile> readingModeTileProvider,
             Provider<AntiFlickerTile> antiFlickerTileProvider,
-            Provider<VpnTile> vpnTileProvider) {
+            Provider<VpnTile> vpnTileProvider,
+            Provider<DataSwitchTile> dataSwitchTileProvider) {
         super(qsHostLazy,
                 customTileBuilderProvider,
                 wifiTileProvider,
@@ -157,7 +159,8 @@ public class QSFactoryImplGoogle extends QSFactoryImpl {
                 liveDisplayTileProvider,
                 readingModeTileProvider,
                 antiFlickerTileProvider,
-                vpnTileProvider);
+                vpnTileProvider,
+                dataSwitchTileProvider);
         mReverseChargingTileProvider = reverseChargingTileProvider;
         mBatterySaverTileGoogleProvider = batterySaverTileGoogleProvider;
     }
