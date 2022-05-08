@@ -5507,6 +5507,24 @@ public final class Settings {
         public static final String MULTI_AUDIO_FOCUS_ENABLED = "multi_audio_focus_enabled";
 
         /**
+         * Optimized charging enabled
+         * @hide
+         */
+        public static final String OPTIMIZED_CHARGE_ENABLED = "optimized_charge_enabled";
+
+        /**
+         * Optimized charging ceiling
+         * @hide
+         */
+        public static final String OPTIMIZED_CHARGE_CEILING = "optimized_charge_ceiling";
+
+        /**
+         * Optimized charging floor
+         * @hide
+         */
+        public static final String OPTIMIZED_CHARGE_FLOOR = "optimized_charge_floor";
+
+        /**
          * Whether to enable fingerprint wake-and-unlock.
          * @hide
          */
@@ -5656,6 +5674,9 @@ public final class Settings {
             PRIVATE_SETTINGS.add(SHOW_BATTERY_PERCENT);
             PRIVATE_SETTINGS.add(DISPLAY_COLOR_MODE);
             PRIVATE_SETTINGS.add(DISPLAY_COLOR_MODE_VENDOR_HINT);
+            PRIVATE_SETTINGS.add(OPTIMIZED_CHARGE_ENABLED);
+            PRIVATE_SETTINGS.add(OPTIMIZED_CHARGE_CEILING);
+            PRIVATE_SETTINGS.add(OPTIMIZED_CHARGE_FLOOR);
         }
 
         /**

@@ -32,4 +32,9 @@
 
     <!-- Whether key handler sends intent when changing slider position -->
     <java-symbol type="string" name="config_alertSliderIntent" />
+
+    <!-- Optimized charge notification -->
+    <java-symbol type="string" name="optimized_charge_notification_channel_label" />
+    <java-symbol type="string" name="optimized_charge_notification_title" />
+    <java-symbol type="string" name="optimized_charge_notification_text" />
 </resources>
