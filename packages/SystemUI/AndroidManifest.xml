@@ -290,6 +290,7 @@
 
     <!-- Permission needed for Arcane Idle Manager -->
     <!-- Kill processes -->
+    <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES"/>
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
 
     <!-- Permission for Smartspace. -->

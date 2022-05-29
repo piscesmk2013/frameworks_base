@@ -47,7 +47,7 @@ public class ArcaneIdleManager {
     static Context imContext;
     static ContentResolver mContentResolver;
     static List<String> killablePackages;
-    static final long IDLE_TIME_NEEDED = 600000;
+    static final long DEFAULT_IDLE_TIME_NEEDED = 1800000;
     static int ultraSaverStatus;
     static final String[] LOG_MSGS = { "just ran ",
                                        "rStateTwo Immediate!",
@@ -78,12 +78,18 @@ public class ArcaneIdleManager {
         String TAG_SUBCLASS = "executeManager ";
         RunningServices = localActivityManager.getRunningAppProcesses();
 
+        String ARCANE_IDLE_TIME = SystemProperties.get("arcane.idle.time");
+        long IDLE_TIME_NEEDED = DEFAULT_IDLE_TIME_NEEDED;
+        if(ARCANE_IDLE_TIME != "" && ARCANE_IDLE_TIME != "0") {
+            IDLE_TIME_NEEDED = Long.parseLong(ARCANE_IDLE_TIME);
+        }
+
         if (IDLE_TIME_NEEDED > msTillAlarm(imContext) && msTillAlarm(imContext) != 0) {
             IdleManLog(TAG_SUBCLASS + LOG_MSGS[1]);
             h.postDelayed(rStateTwo,100);
         } else {
             IdleManLog(TAG_SUBCLASS + LOG_MSGS[2]);
-            h.postDelayed(rStateTwo,IDLE_TIME_NEEDED /*10min*/);
+            h.postDelayed(rStateTwo,IDLE_TIME_NEEDED /*30min*/);
         }
         if (msTillAlarm(imContext) != 0) {
             IdleManLog(TAG_SUBCLASS + LOG_MSGS[3]);
@@ -123,6 +129,7 @@ public class ArcaneIdleManager {
     public static void servicesKiller() {
         String TAG_SUBCLASS = "servicesKiller";
         IdleManLog(LOG_MSGS[0] + TAG_SUBCLASS);
+        boolean AGGRESSIVE_MODE = SystemProperties.getBoolean("arcane.aggressive.mode", false);
         localActivityManager = (ActivityManager) imContext.getSystemService(Context.ACTIVITY_SERVICE);
         RunningServices = localActivityManager.getRunningAppProcesses();
         for (int i=0; i < RunningServices.size(); i++) {
@@ -133,13 +140,26 @@ public class ArcaneIdleManager {
                 !RunningServices.get(i).pkgList[0].toString().contains("tencent.mm") &&
                 !RunningServices.get(i).pkgList[0].toString().contains("tencent.mobileqq") &&
                 !RunningServices.get(i).pkgList[0].toString().contains("oneplus.camera") &&
+                !RunningServices.get(i).pkgList[0].toString().contains("pixelexperience") &&
+                !RunningServices.get(i).pkgList[0].toString().contains("camerahelper") &&
+                !RunningServices.get(i).pkgList[0].toString().contains("ext.services") &&
                 !RunningServices.get(i).pkgList[0].toString().contains("appops") &&
+                !RunningServices.get(i).pkgList[0].toString().contains("kr328.clash") &&
                 !RunningServices.get(i).pkgList[0].toString().contains("DeviceSettings") &&
                 !RunningServices.get(i).pkgList[0].toString().contains("com.qualcomm") &&
+                !RunningServices.get(i).pkgList[0].toString().contains("qti.hardware") &&
+                !RunningServices.get(i).pkgList[0].toString().contains("magisk") &&
+                !RunningServices.get(i).pkgList[0].toString().contains("chaldeaprjkt.gamespace") &&
                 !RunningServices.get(i).pkgList[0].toString().contains("snapcam") &&
                 !RunningServices.get(i).pkgList[0].toString().contains("settings") &&
                 !RunningServices.get(i).pkgList[0].toString().contains("ims")) {
-                    localActivityManager.killBackgroundProcesses(RunningServices.get(i).pkgList[0].toString());
+                    if (AGGRESSIVE_MODE) {
+                        localActivityManager.forceStopPackage(RunningServices.get(i).pkgList[0].toString());
+                        IdleManLog(TAG_SUBCLASS + RunningServices.get(i).pkgList[0].toString());
+                    } else {
+                        localActivityManager.killBackgroundProcesses(RunningServices.get(i).pkgList[0].toString());
+                        IdleManLog(TAG_SUBCLASS + RunningServices.get(i).pkgList[0].toString());
+                    }
             }
         }
     }
