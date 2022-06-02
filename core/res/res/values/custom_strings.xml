@@ -16,4 +16,7 @@
     <string name="optimized_charge_notification_title">Charging suspended</string>
     <string name="optimized_charge_notification_text">Charging suspended because of optimized charging policy</string>
 
+    <!-- Lock gesture -->
+    <string name="gesture_locked_warning">Swipe again to unlock gestures</string>
+
 </resources>

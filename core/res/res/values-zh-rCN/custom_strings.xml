@@ -3,5 +3,6 @@
     <string name="optimized_charge_notification_channel_label">充电优化</string>
     <string name="optimized_charge_notification_title">充电已暂停</string>
     <string name="optimized_charge_notification_text">因充电优化策略，充电已暂停</string>
+    <string name="gesture_locked_warning">再次滑动以解锁手势</string>
 
 </resources>

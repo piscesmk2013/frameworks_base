@@ -51,4 +51,7 @@
     <java-symbol type="string" name="optimized_charge_notification_title" />
     <java-symbol type="string" name="optimized_charge_notification_text" />
 
+    <!-- Lock gesture -->
+    <java-symbol type="string" name="gesture_locked_warning" />
+
 </resources>
