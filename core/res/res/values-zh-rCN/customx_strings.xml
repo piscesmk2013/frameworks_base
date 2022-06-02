@@ -21,4 +21,5 @@
     <string name="accessibility_quick_settings_live_display_changed_day">视觉效果已改为白天模式。</string>
     <string name="accessibility_quick_settings_live_display_changed_night">视觉效果已改为夜晚模式。</string>
     <string name="accessibility_quick_settings_live_display_changed_outdoor">视觉效果已改为户外模式。</string>
+    <string name="gesture_locked_warning">再次滑动以解锁手势</string>
 </resources>
