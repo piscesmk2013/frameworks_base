@@ -249,6 +249,8 @@ public interface AppStandbyInternal {
     void dumpState(String[] args, PrintWriter pw);
 
     boolean isAppIdleEnabled();
+    
+    boolean isStrictStandbyPolicyEnabled();
 
     /**
      * Returns the duration (in millis) for the window where events occurring will be
