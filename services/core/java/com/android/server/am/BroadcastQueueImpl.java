@@ -1406,6 +1406,18 @@ public class BroadcastQueueImpl extends BroadcastQueue {
             }
         }
 
+        if (!skip) {
+            if (app == null) {
+                // Application not running, skip if blacklisted.
+                if (mService.isBackgroundRestricted(info.activityInfo.applicationInfo)) {
+                    Slog.i(TAG, "Skipping delivery " + r.intent
+                                + " to " + info.activityInfo.applicationInfo.packageName
+                                + " because of restriction");
+                    skip = true;
+                }
+            }
+        }
+
         if (skip) {
             if (DEBUG_BROADCAST)  Slog.v(TAG_BROADCAST,
                     "Skipping delivery of ordered [" + mQueueName + "] "
