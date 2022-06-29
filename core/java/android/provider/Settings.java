@@ -17189,6 +17189,14 @@ public final class Settings {
         public static final String STRICT_STANDBY_POLICY = "strict_standby_policy";
 
         /**
+         * Whether force background freezer should be used. This will freeze tasks with
+         * restricted battery usage when moving them to background and unfreeze them when
+         * moving to foreground.
+         * @hide
+         */
+        public static final String FORCE_BACKGROUND_FREEZER = "force_background_freezer";
+
+        /**
          * Settings migrated from Wear OS settings provider.
          * @hide
          */
