@@ -8011,6 +8011,7 @@ public class ActivityManagerService extends IActivityManager.Stub
         mHiddenApiBlacklist.registerObserver();
         mSdkSandboxSettings.registerObserver();
         mPlatformCompat.registerContentObserver();
+        mOomAdjuster.registerContentObserver();
 
         mAppProfiler.retrieveSettings();
 
@@ -18466,7 +18467,13 @@ public class ActivityManagerService extends IActivityManager.Stub
 
     @Override
     public boolean isAppFreezerEnabled() {
-        return mOomAdjuster.mCachedAppOptimizer.useFreezer();
+        final long token = Binder.clearCallingIdentity();
+
+        try {
+            return mOomAdjuster.mCachedAppOptimizer.useFreezer();
+        } finally {
+            Binder.restoreCallingIdentity(token);
+        }
     }
 
     /**
@@ -18560,7 +18567,8 @@ public class ActivityManagerService extends IActivityManager.Stub
     }
 
     boolean shouldSkipBootCompletedBroadcastForPackage(ApplicationInfo info) {
-        return mActivityTaskManager.mAppStandbyInternal.isStrictStandbyPolicyEnabled() &&
+        return (mActivityTaskManager.mAppStandbyInternal.isStrictStandbyPolicyEnabled()
+                || mOomAdjuster.mForceBackgroundFreezerEnabled) &&
                 getAppOpsManager().checkOpNoThrow(
                         AppOpsManager.OP_RUN_ANY_IN_BACKGROUND,
                         info.uid, info.packageName) != AppOpsManager.MODE_ALLOWED;
