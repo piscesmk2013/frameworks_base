@@ -11952,6 +11952,7 @@ public final class Settings {
          *
          * @hide
          */
+        @Readable
         public static final String STATUS_BAR_SHOW_LYRIC = "status_bar_show_lyric";
     }
 
