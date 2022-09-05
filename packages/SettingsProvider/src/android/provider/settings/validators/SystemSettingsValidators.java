@@ -320,5 +320,6 @@ public class SystemSettingsValidators {
                     }
                 });
         VALIDATORS.put(System.SHOW_FOURG_ICON, BOOLEAN_VALIDATOR);
+		VALIDATORS.put(System.SHOW_APP_VOLUME, BOOLEAN_VALIDATOR);
     }
 }
