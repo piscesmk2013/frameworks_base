@@ -18719,7 +18719,7 @@ public class ActivityManagerService extends IActivityManager.Stub
         }
     }
 
-    boolean shouldSkipBootCompletedBroadcastForPackage(ApplicationInfo info) {
+    boolean isBackgroundRestricted(ApplicationInfo info) {
         return mActivityTaskManager.mAppStandbyInternal.isStrictStandbyPolicyEnabled() &&
                 getAppOpsManager().checkOpNoThrow(
                         AppOpsManager.OP_RUN_ANY_IN_BACKGROUND,
