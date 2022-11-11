@@ -602,8 +602,6 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
 
     @Override
     public void onTuningChanged(String key, String newValue) {
-        mClockView.setClockVisibleByUser(!StatusBarIconController.getIconHideList(
-                mContext, newValue).contains("clock"));
     }
 
     private void setBatteryRemainingOnClick(boolean enable) {
