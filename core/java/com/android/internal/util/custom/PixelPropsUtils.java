@@ -94,15 +94,16 @@ public class PixelPropsUtils {
     private static final Map<String, Object> propsToChangeOP9P;
     private static final String[] packagesToChangeOP9P = {
             "com.epicgames.fortnite",
-            "com.epicgames.portal"
+            "com.epicgames.portal",
+            "com.tencent.tmgp.sgame",
+            "com.tencent.lolm"
     };
 
     private static final Map<String, Object> propsToChangeMI11;
     private static final String[] packagesToChangeMI11 = {
             "com.ea.gp.apexlegendsmobilefps",
             "com.levelinfinite.hotta.gp",
-            "com.mobile.legends",
-            "com.tencent.tmgp.sgame"
+            "com.mobile.legends"
     };
 
     private static final String[] packagesToKeep = {
