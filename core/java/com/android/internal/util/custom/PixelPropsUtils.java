@@ -76,6 +76,7 @@ public class PixelPropsUtils {
             "com.android.chrome",
             "com.android.vending",
             "com.breel.wallpapers20",
+            "com.microsoft.android.smsorganizer",
             "com.nothing.smartcenter"
     };
 
