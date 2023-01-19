@@ -76,4 +76,7 @@
          will be charged between (limit - val) and limit. -->
     <integer name="config_chargingControlBatteryRechargeMargin">10</integer>
 
+    <!-- Display color inversion availability -->
+    <bool name="config_displayInversionAvailable">true</bool>
+
 </resources>
