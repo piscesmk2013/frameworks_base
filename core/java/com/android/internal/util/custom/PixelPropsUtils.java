@@ -168,9 +168,7 @@ public class PixelPropsUtils {
 
             boolean isPixelDevice = Arrays.asList(pixelCodenames).contains(SystemProperties.get(DEVICE));
 
-            if (packageName.equals("com.google.android.apps.photos")) {
-                propsToChange.putAll(propsToChangePixelXL);
-            } else if (packageName.equals("com.android.vending")) {
+            if (packageName.equals("com.android.vending")) {
                 sIsFinsky = true;
                 return;
             } else if (!isPixelDevice) {
