@@ -1163,9 +1163,8 @@ public final class BroadcastQueue {
     }
 
     private boolean isBootCompletedIntent(Intent intent) {
-        return Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction()) ||
-                Intent.ACTION_LOCKED_BOOT_COMPLETED.equals(intent.getAction()) ||
-                Intent.ACTION_MEDIA_MOUNTED.equals(intent.getAction());
+        return intent.getAction() == Intent.ACTION_BOOT_COMPLETED ||
+                intent.getAction() == Intent.ACTION_LOCKED_BOOT_COMPLETED;
     }
 
     final void processNextBroadcastLocked(boolean fromMsg, boolean skipOomAdj) {
@@ -1557,7 +1556,7 @@ public final class BroadcastQueue {
         if (isBootCompletedIntent(r.intent) &&
                 mService.shouldSkipBootCompletedBroadcastForPackage(
                         info.activityInfo.applicationInfo)) {
-            Slog.i(TAG, "Boot broadcast skipped for "
+            Slog.i(TAG, "BOOT_COMPLETED broadcast skipped for "
                     + info.activityInfo.applicationInfo.packageName);
             skip = true;
         }
