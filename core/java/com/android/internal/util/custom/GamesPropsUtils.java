@@ -67,7 +67,6 @@ public class GamesPropsUtils {
     private static final String[] packagesToChangeOP9P = {
             "com.epicgames.fortnite",
             "com.epicgames.portal",
-            "com.mobile.legends",
             "com.tencent.lolm",
             "com.tencent.tmgp.sgame"
     };
@@ -78,35 +77,50 @@ public class GamesPropsUtils {
             "com.dts.freefireth"
     };
 
-    private static final Map<String, Object> propsToChange11T;
-    private static final String[] packagesToChange11T = {
+    private static final Map<String, Object> propsToChange11TP;
+    private static final String[] packagesToChange11TP = {
             "com.ea.gp.apexlegendsmobilefps",
             "com.levelinfinite.hotta.gp",
+            "com.mobile.legends",
             "com.vng.mlbbvn"
     };
 
     static {
         propsToChangeROG1 = new HashMap<>();
-        propsToChangeROG1.put("MODEL", "ASUS_Z01QD");
+        propsToChangeROG1.put("BRAND", "asus");
         propsToChangeROG1.put("MANUFACTURER", "asus");
+        propsToChangeROG1.put("DEVICE", "Z01QD_1");
+        propsToChangeROG1.put("MODEL", "ASUS_Z01QD");
         propsToChangeROG3 = new HashMap<>();
-        propsToChangeROG3.put("MODEL", "ASUS_I003D");
+        propsToChangeROG3.put("BRAND", "asus");
         propsToChangeROG3.put("MANUFACTURER", "asus");
+        propsToChangeROG3.put("DEVICE", "I003_1");
+        propsToChangeROG3.put("MODEL", "ASUS_I003D");
         propsToChangeXP5 = new HashMap<>();
-        propsToChangeXP5.put("MODEL", "SO-52A");
+        propsToChangeXP5.put("BRAND", "Sony");
         propsToChangeXP5.put("MANUFACTURER", "Sony");
+        propsToChangeXP5.put("DEVICE", "SO-52A");
+        propsToChangeXP5.put("MODEL", "SO-52A");
         propsToChangeOP8P = new HashMap<>();
-        propsToChangeOP8P.put("MODEL", "IN2020");
+        propsToChangeOP8P.put("BRAND", "OnePlus");
         propsToChangeOP8P.put("MANUFACTURER", "OnePlus");
+        propsToChangeOP8P.put("DEVICE", "OnePlus8Pro");
+        propsToChangeOP8P.put("MODEL", "IN2020");
         propsToChangeOP9P = new HashMap<>();
-        propsToChangeOP9P.put("MODEL", "LE2123");
+        propsToChangeOP9P.put("BRAND", "OnePlus");
         propsToChangeOP9P.put("MANUFACTURER", "OnePlus");
-        propsToChange11T = new HashMap<>();
-        propsToChange11T.put("MODEL", "21081111RG");
-        propsToChange11T.put("MANUFACTURER", "Xiaomi");
+        propsToChangeOP9P.put("DEVICE", "OnePlus9Pro");
+        propsToChangeOP9P.put("MODEL", "LE2123");
+        propsToChange11TP = new HashMap<>();
+        propsToChange11TP.put("BRAND", "Xiaomi");
+        propsToChange11TP.put("MANUFACTURER", "Xiaomi");
+        propsToChange11TP.put("DEVICE", "vili");
+        propsToChange11TP.put("MODEL", "2107113SI");
         propsToChangeF4 = new HashMap<>();
-        propsToChangeF4.put("MODEL", "22021211RG");
+        propsToChangeF4.put("BRAND", "Xiaomi");
         propsToChangeF4.put("MANUFACTURER", "Xiaomi");
+        propsToChangeF4.put("DEVICE", "munch_global");
+        propsToChangeF4.put("MODEL", "22021211RG");
     }
 
     public static void setProps(String packageName) {
@@ -163,11 +177,11 @@ public class GamesPropsUtils {
                 setPropValue(key, value);
             }
         }
-        if (Arrays.asList(packagesToChange11T).contains(packageName)){
+        if (Arrays.asList(packagesToChange11TP).contains(packageName)){
             if (DEBUG){
                 Log.d(TAG, "Defining props for: " + packageName);
             }
-            for (Map.Entry<String, Object> prop : propsToChange11T.entrySet()) {
+            for (Map.Entry<String, Object> prop : propsToChange11TP.entrySet()) {
                 String key = prop.getKey();
                 Object value = prop.getValue();
                 setPropValue(key, value);
