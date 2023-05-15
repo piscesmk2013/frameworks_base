@@ -29,21 +29,18 @@ public class GamesPropsUtils {
     private static final String TAG = GamesPropsUtils.class.getSimpleName();
     private static final boolean DEBUG = false;
 
-    private static final Map<String, Object> propsToChangeROG1;
-    private static final String[] packagesToChangeROG1 = {
-            "com.madfingergames.legends"
-    };
-
-    private static final Map<String, Object> propsToChangeROG3;
-    private static final String[] packagesToChangeROG3 = {
+    private static final Map<String, Object> propsToChangeROG6;
+    private static final String[] packagesToChangeROG6 = {
     	    "com.ea.gp.fifamobile",
-            "com.pearlabyss.blackdesertm.gl",
-            "com.pearlabyss.blackdesertm"
+            "com.activision.callofduty.shooter",
+            "com.madfingergames.legends",
+            "com.mobile.legends",
+            "com.pearlabyss.blackdesertm",
+            "com.pearlabyss.blackdesertm.gl"
     };
 
     private static final Map<String, Object> propsToChangeXP5;
     private static final String[] packagesToChangeXP5 = {
-            "com.activision.callofduty.shooter",
             "com.tencent.tmgp.kr.codm",
             "com.garena.game.codm",
             "com.vng.codmvn"
@@ -81,21 +78,15 @@ public class GamesPropsUtils {
     private static final String[] packagesToChange11TP = {
             "com.ea.gp.apexlegendsmobilefps",
             "com.levelinfinite.hotta.gp",
-            "com.mobile.legends",
             "com.vng.mlbbvn"
     };
 
     static {
-        propsToChangeROG1 = new HashMap<>();
-        propsToChangeROG1.put("BRAND", "asus");
-        propsToChangeROG1.put("MANUFACTURER", "asus");
-        propsToChangeROG1.put("DEVICE", "Z01QD_1");
-        propsToChangeROG1.put("MODEL", "ASUS_Z01QD");
-        propsToChangeROG3 = new HashMap<>();
-        propsToChangeROG3.put("BRAND", "asus");
-        propsToChangeROG3.put("MANUFACTURER", "asus");
-        propsToChangeROG3.put("DEVICE", "I003_1");
-        propsToChangeROG3.put("MODEL", "ASUS_I003D");
+        propsToChangeROG6 = new HashMap<>();
+        propsToChangeROG6.put("BRAND", "asus");
+        propsToChangeROG6.put("MANUFACTURER", "asus");
+        propsToChangeROG6.put("DEVICE", "AI2201");
+        propsToChangeROG6.put("MODEL", "ASUS_AI2201");
         propsToChangeXP5 = new HashMap<>();
         propsToChangeXP5.put("BRAND", "Sony");
         propsToChangeXP5.put("MANUFACTURER", "Sony");
@@ -127,21 +118,11 @@ public class GamesPropsUtils {
         if (packageName == null || packageName.isEmpty()) {
             return;
         }
-        if (Arrays.asList(packagesToChangeROG1).contains(packageName)){
+        if (Arrays.asList(packagesToChangeROG6).contains(packageName)){
             if (DEBUG){
                 Log.d(TAG, "Defining props for: " + packageName);
             }
-            for (Map.Entry<String, Object> prop : propsToChangeROG1.entrySet()) {
-                String key = prop.getKey();
-                Object value = prop.getValue();
-                setPropValue(key, value);
-            }
-        }
-        if (Arrays.asList(packagesToChangeROG3).contains(packageName)){
-            if (DEBUG){
-                Log.d(TAG, "Defining props for: " + packageName);
-            }
-            for (Map.Entry<String, Object> prop : propsToChangeROG3.entrySet()) {
+            for (Map.Entry<String, Object> prop : propsToChangeROG6.entrySet()) {
                 String key = prop.getKey();
                 Object value = prop.getValue();
                 setPropValue(key, value);
