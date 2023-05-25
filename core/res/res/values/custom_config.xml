@@ -111,4 +111,7 @@
       -->
     </string-array>
 
+    <!-- Mock Oplus LinearmotorVibratorService -->
+    <bool name="config_mockOplusLinearmotorVibratorService">false</bool>
+
 </resources>
