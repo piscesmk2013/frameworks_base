@@ -187,7 +187,7 @@ public class CameraServiceProxy extends SystemService
     private static final int MAX_STREAM_STATISTICS = 5;
 
     private static final float MIN_PREVIEW_FPS = 30.0f;
-    private static final float MAX_PREVIEW_FPS = 60.0f;
+    private static final float MAX_PREVIEW_FPS = 90.0f;
 
     private final Context mContext;
     private final ServiceThread mHandlerThread;
@@ -1057,7 +1057,7 @@ public class CameraServiceProxy extends SystemService
 
     private float getMinFps(CameraSessionStats cameraState) {
         float maxFps = cameraState.getMaxPreviewFps();
-        return Math.max(Math.min(maxFps, MAX_PREVIEW_FPS), MIN_PREVIEW_FPS);
+        return Math.max(Math.max(maxFps, MAX_PREVIEW_FPS), MIN_PREVIEW_FPS);
     }
 
     private void updateActivityCount(CameraSessionStats cameraState) {
