@@ -39,6 +39,11 @@ public class GamesPropsUtils {
             "com.pearlabyss.blackdesertm.gl"
     };
 
+    private static final Map<String, Object> propsToChangeK30U;
+    private static final String[] packagesToChangeK30U = {
+            "com.pubg.imobile"
+    };
+
     private static final Map<String, Object> propsToChangeXP5;
     private static final String[] packagesToChangeXP5 = {
             "com.tencent.tmgp.kr.codm",
@@ -49,7 +54,6 @@ public class GamesPropsUtils {
     private static final Map<String, Object> propsToChangeOP8P;
     private static final String[] packagesToChangeOP8P = {
             "com.tencent.ig",
-            "com.pubg.imobile",
             "com.pubg.krmobile",
             "com.vng.pubgmobile",
             "com.rekoo.pubgm",
@@ -112,11 +116,24 @@ public class GamesPropsUtils {
         propsToChangeF4.put("MANUFACTURER", "Xiaomi");
         propsToChangeF4.put("DEVICE", "munch_global");
         propsToChangeF4.put("MODEL", "22021211RG");
+        propsToChangeK30U = new HashMap<>();
+        propsToChangeK30U.put("MODEL", "M2006J10C");
+        propsToChangeK30U.put("MANUFACTURER", "Xiaomi");
     }
 
     public static void setProps(String packageName) {
         if (packageName == null || packageName.isEmpty()) {
             return;
+        }
+        if (Arrays.asList(packagesToChangeK30U).contains(packageName)){
+            if (DEBUG){
+                Log.d(TAG, "Defining props for: " + packageName);
+            }
+            for (Map.Entry<String, Object> prop : propsToChangeK30U.entrySet()) {
+                String key = prop.getKey();
+                Object value = prop.getValue();
+                setPropValue(key, value);
+            }
         }
         if (Arrays.asList(packagesToChangeROG6).contains(packageName)){
             if (DEBUG){
