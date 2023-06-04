@@ -44,6 +44,13 @@ public class GamesPropsUtils {
             "com.pubg.imobile"
     };
 
+    private static final Map<String, Object> propsToChangeMi13pCN;
+    private static final String[] packagesToChangeMi13pCN = {
+            "com.tencent.lolm",
+            "com.tencent.tmgp.sgame",
+            "com.levelinfinite.sgameGlobal"
+    };
+
     private static final Map<String, Object> propsToChangeXP5;
     private static final String[] packagesToChangeXP5 = {
             "com.tencent.tmgp.kr.codm",
@@ -67,9 +74,7 @@ public class GamesPropsUtils {
     private static final Map<String, Object> propsToChangeOP9P;
     private static final String[] packagesToChangeOP9P = {
             "com.epicgames.fortnite",
-            "com.epicgames.portal",
-            "com.tencent.lolm",
-            "com.tencent.tmgp.sgame"
+            "com.epicgames.portal"
     };
 
     private static final Map<String, Object> propsToChangeF4;
@@ -119,6 +124,9 @@ public class GamesPropsUtils {
         propsToChangeK30U = new HashMap<>();
         propsToChangeK30U.put("MODEL", "M2006J10C");
         propsToChangeK30U.put("MANUFACTURER", "Xiaomi");
+        propsToChangeMi13pCN = new HashMap<>();
+        propsToChangeMi13pCN.put("MODEL", "2210132C");
+        propsToChangeMi13pCN.put("MANUFACTURER", "Xiaomi");
     }
 
     public static void setProps(String packageName) {
@@ -130,6 +138,16 @@ public class GamesPropsUtils {
                 Log.d(TAG, "Defining props for: " + packageName);
             }
             for (Map.Entry<String, Object> prop : propsToChangeK30U.entrySet()) {
+                String key = prop.getKey();
+                Object value = prop.getValue();
+                setPropValue(key, value);
+            }
+        }
+        if (Arrays.asList(packagesToChangeMi13pCN).contains(packageName)){
+            if (DEBUG){
+                Log.d(TAG, "Defining props for: " + packageName);
+            }
+            for (Map.Entry<String, Object> prop : propsToChangeMi13pCN.entrySet()) {
                 String key = prop.getKey();
                 Object value = prop.getValue();
                 setPropValue(key, value);
