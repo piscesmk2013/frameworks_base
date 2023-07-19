@@ -360,6 +360,12 @@ public class AmbientDisplayConfiguration {
         Settings.Secure.putStringForUser(mContext.getContentResolver(), name, value, userId);
     }
 
+    /** @hide */
+    public boolean tapAmbient(int user) {
+        return Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.TAP_AMBIENT_WAKE_GESTURES, 0, user) != 0;
+    }
+
     /** {@hide} */
     public boolean doubleTapAmbient(int user) {
         return Settings.System.getIntForUser(mContext.getContentResolver(),

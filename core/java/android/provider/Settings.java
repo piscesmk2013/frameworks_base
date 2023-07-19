@@ -6084,6 +6084,12 @@ public final class Settings {
         public static final String SHOW_APP_VOLUME = "show_app_volume";
 
         /**
+         * Whether to show ambient instead of waking for the tap gesture
+         * @hide
+         */
+        public static final String TAP_AMBIENT_WAKE_GESTURES = "tap_ambient_wake_gestures";
+
+        /**
          * Whether to show ambient instead of lockscreen during dt2w
          *
          * @hide
@@ -6363,6 +6369,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(OPTIMIZED_CHARGE_ENABLED);
             PRIVATE_SETTINGS.add(OPTIMIZED_CHARGE_CEILING);
             PRIVATE_SETTINGS.add(OPTIMIZED_CHARGE_FLOOR);
+            PRIVATE_SETTINGS.add(TAP_AMBIENT_WAKE_GESTURES);
             PRIVATE_SETTINGS.add(DOUBLE_TAP_AMBIENT_WAKE_GESTURES);
             PRIVATE_SETTINGS.add(PICKUP_AMBIENT_WAKE_GESTURES);
             PRIVATE_SETTINGS.add(AMBIENT_NOTIFICATION_LIGHT);
