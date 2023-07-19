@@ -110,5 +110,6 @@ public class SystemSettings {
         Settings.System.NETWORK_TRAFFIC_VIEW_LOCATION,
         Settings.System.DOUBLE_TAP_AMBIENT_WAKE_GESTURES,
         Settings.System.PICKUP_AMBIENT_WAKE_GESTURES,
+        Settings.System.TAP_AMBIENT_WAKE_GESTURES,
     };
 }

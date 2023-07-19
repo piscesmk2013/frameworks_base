@@ -5971,6 +5971,12 @@ public final class Settings {
         public static final String PICKUP_AMBIENT_WAKE_GESTURES = "pickup_ambient_wake_gestures";
 
         /**
+         * Whether to show ambient instead of waking for the tap gesture
+         * @hide
+         */
+        public static final String TAP_AMBIENT_WAKE_GESTURES = "tap_ambient_wake_gestures";
+
+        /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate
@@ -6121,6 +6127,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(AUTO_BRIGHTNESS_ONE_SHOT);
             PRIVATE_SETTINGS.add(DOUBLE_TAP_AMBIENT_WAKE_GESTURES);
             PRIVATE_SETTINGS.add(PICKUP_AMBIENT_WAKE_GESTURES);
+            PRIVATE_SETTINGS.add(TAP_AMBIENT_WAKE_GESTURES);
         }
 
         /**
