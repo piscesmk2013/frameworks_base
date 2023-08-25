@@ -86,7 +86,6 @@ public class GamesPropsUtils {
 
     private static final Map<String, Object> propsToChange11TP;
     private static final String[] packagesToChange11TP = {
-            "com.ea.gp.apexlegendsmobilefps",
             "com.levelinfinite.hotta.gp",
             "com.vng.mlbbvn"
     };
