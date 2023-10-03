@@ -5374,7 +5374,6 @@ public final class NotificationPanelViewController implements Dumpable {
         if (visibility && mReTickerComeback.getVisibility() == View.VISIBLE) {
             reTickerDismissal();
         }
-        String reTickerContent;
         if (visibility && getExpandedFraction() != 1) {
             mNotificationStackScroller.setVisibility(View.GONE);
             StatusBarNotification sbn
@@ -5388,17 +5387,23 @@ public final class NotificationPanelViewController implements Dumpable {
                         sbn.getUser().getIdentifier()
                     );
 
-            String content = notification.extras.getString("android.text");
-            if (TextUtils.isEmpty(content)) return;
-
-            reTickerContent = content;
-            String reTickerAppName = notification.extras.getString("android.title");
+            String reTickerContent;
+            final String notifTitle = notification.extras.getString(Notification.EXTRA_TITLE);
+            final String notifText = notification.extras.getString(Notification.EXTRA_TEXT);
+            if (!TextUtils.isEmpty(notifTitle) && !TextUtils.isEmpty(notifText)) {
+                reTickerContent = notifTitle + " " + notifText;
+            } else if (TextUtils.isEmpty(notifText)) {
+                reTickerContent = notifTitle;
+            } else if (TextUtils.isEmpty(notifTitle)) {
+                reTickerContent = notifText;
+            } else {
+                return;
+            }
             PendingIntent reTickerIntent = notification.contentIntent;
-            String mergedContentText = reTickerAppName + " " + reTickerContent;
             mReTickerComebackIcon.setImageDrawable(icon);
             Drawable dw = getRetickerBackgroundDrawable(pkgname, notification.color);
             mReTickerComeback.setBackground(dw);
-            mReTickerContentTV.setText(mergedContentText);
+            mReTickerContentTV.setText(reTickerContent);
             mReTickerContentTV.setTextAppearance(mView.getContext(), R.style.TextAppearance_Notifications_reTicker);
             mReTickerContentTV.setSelected(true);
             RetickerAnimations.doBounceAnimationIn(mReTickerComeback);
