@@ -5228,8 +5228,8 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                     );
 
             String reTickerContent;
-            final String notifTitle = notification.extras.getString(Notification.EXTRA_TITLE);
-            final String notifText = notification.extras.getString(Notification.EXTRA_TEXT);
+            final String notifTitle = String.valueOf(notification.extras.get(Notification.EXTRA_TITLE));
+            final String notifText = String.valueOf(notification.extras.get(Notification.EXTRA_TEXT));
             if (!TextUtils.isEmpty(notifTitle) && !TextUtils.isEmpty(notifText)) {
                 reTickerContent = notifTitle + " " + notifText;
             } else if (TextUtils.isEmpty(notifText)) {
