@@ -1105,8 +1105,7 @@ final class ActivityManagerConstants extends ContentObserver {
     private void updatePerfConfigConstants() {
         if (mPerf != null) {
           // Maximum number of cached processes we will allow.
-            DEFAULT_MAX_CACHED_PROCESSES = MAX_CACHED_PROCESSES = CUR_MAX_CACHED_PROCESSES = Integer.valueOf(
-                                                 mPerf.perfGetProp("ro.vendor.qti.sys.fw.bg_apps_limit", "32"));
+            DEFAULT_MAX_CACHED_PROCESSES = MAX_CACHED_PROCESSES = CUR_MAX_CACHED_PROCESSES = mCustomizedMaxCachedProcesses;
 
             //Trim Settings
             USE_TRIM_SETTINGS = Boolean.parseBoolean(mPerf.perfGetProp("ro.vendor.qti.sys.fw.use_trim_settings", "true"));
