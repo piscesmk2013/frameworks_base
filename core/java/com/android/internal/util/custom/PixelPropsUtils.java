@@ -44,7 +44,6 @@ public class PixelPropsUtils {
     private static final String TAG = PixelPropsUtils.class.getSimpleName();
     private static final String DEVICE = "org.pixelexperience.device";
 
-    private static final String PACKAGE_GMS = "com.google.android.gms";
     private static final ComponentName GMS_ADD_ACCOUNT_ACTIVITY = ComponentName.unflattenFromString(
             "com.google.android.gms/.auth.uiflows.minutemaid.MinuteMaidActivity");
 
@@ -168,55 +167,51 @@ public class PixelPropsUtils {
                 Arrays.asList(customGoogleCameraPackages).contains(packageName);
     }
     
-    public static boolean setPropsForGms(String packageName) {
-        if (packageName.equals("com.android.vending")) {
-            sIsFinsky = true;
-        }
-        if (packageName.equals(PACKAGE_GMS)
-                || packageName.toLowerCase().contains("androidx.test")
-                || packageName.equalsIgnoreCase("com.google.android.apps.restore")) {
-            setBuildField("TIME", System.currentTimeMillis());
-            final String processName = Application.getProcessName();
-            if (processName.toLowerCase().contains("unstable")
-                    || processName.toLowerCase().contains("pixelmigrate")
-                    || processName.toLowerCase().contains("instrumentation")) {
-                sIsGms = true;
+    
+    private static boolean shouldTryToCertifyDevice() {
+        if (!sIsGms) return false;
 
-                final boolean was = isGmsAddAccountActivityOnTop();
-                final TaskStackListener taskStackListener = new TaskStackListener() {
-                    @Override
-                    public void onTaskStackChanged() {
-                        final boolean is = isGmsAddAccountActivityOnTop();
-                        if (is ^ was) {
-                            dlog("GmsAddAccountActivityOnTop is:" + is + " was:" + was + ", killing myself!");
-                            // process will restart automatically later
-                            Process.killProcess(Process.myPid());
-                        }
-                    }
-                };
-                try {
-                    ActivityTaskManager.getService().registerTaskStackListener(taskStackListener);
-                } catch (Exception e) {
-                    Log.e(TAG, "Failed to register task stack listener!", e);
+        setBuildField("TIME", System.currentTimeMillis());
+
+        final boolean was = isGmsAddAccountActivityOnTop();
+        final String reason = "GmsAddAccountActivityOnTop";
+        if (!was) {
+            spoofBuildGms();
+            return true;
+        }
+        dlog("Skip spoofing build for GMS, because " + reason + "!");
+        TaskStackListener taskStackListener = new TaskStackListener() {
+            @Override
+            public void onTaskStackChanged() {
+                final boolean isNow = isGmsAddAccountActivityOnTop();
+                if (isNow ^ was) {
+                    dlog(String.format("%s changed: isNow=%b, was=%b, killing myself!", reason, isNow, was));
+                    Process.killProcess(Process.myPid());
                 }
-                if (was) return true;
-
-                dlog("Spoofing build for GMS");
-                // Alter build parameters to avoid hardware attestation enforcement
-                setBuildField("BRAND", "NVIDIA");
-                setBuildField("PRODUCT", "foster_e");
-                setBuildField("MODEL", "SHIELD Android TV");
-                setBuildField("MANUFACTURER", "NVIDIA");
-                setBuildField("DEVICE", "foster");
-                setBuildField("FINGERPRINT", "NVIDIA/foster_e/foster:7.0/NRD90M/2427173_1038.2788:user/release-keys");
-                setBuildField("ID", "NRD90M");
-                setBuildField("TYPE", "user");
-                setBuildField("TAGS", "release-keys");
-                setVersionField("SECURITY_PATCH", "2018-01-05");
-                return true;
             }
+        };
+        try {
+            ActivityTaskManager.getService().registerTaskStackListener(taskStackListener);
+            return false;
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to register task stack listener!", e);
+            spoofBuildGms();
+            return true;
         }
-        return false;
+    }
+
+    private static void spoofBuildGms() {
+        // Alter model name and fingerprint to avoid hardware attestation enforcement
+        setBuildField("BRAND", "NVIDIA");
+        setBuildField("PRODUCT", "foster_e");
+        setBuildField("MODEL", "SHIELD Android TV");
+        setBuildField("MANUFACTURER", "NVIDIA");
+        setBuildField("DEVICE", "foster");
+        setBuildField("FINGERPRINT", "NVIDIA/foster_e/foster:7.0/NRD90M/2427173_1038.2788:user/release-keys");
+        setBuildField("ID", "NRD90M");
+        setBuildField("TYPE", "user");
+        setBuildField("TAGS", "release-keys");
+        setVersionField("SECURITY_PATCH", "2018-01-05");
     }
 
     public static void setProps(String packageName) {
@@ -224,9 +219,16 @@ public class PixelPropsUtils {
         if (packageName == null || packageName.isEmpty()) {
             return;
         }
-        if (setPropsForGms(packageName)){
+
+        if (packageName.equals("com.android.vending")) {
+            sIsFinsky = true;
+        } else if (packageName.equals("com.google.android.gms")) {
+            sIsGms = true;
+        }
+        if (shouldTryToCertifyDevice()) {
             return;
         }
+
         if (Arrays.asList(packagesToKeep).contains(packageName)) {
             return;
         }
@@ -325,14 +327,16 @@ public class PixelPropsUtils {
     }
 
     private static boolean isCallerSafetyNet() {
-        return sIsGms && Arrays.stream(Thread.currentThread().getStackTrace())
-                .anyMatch(elem -> elem.getClassName().contains("DroidGuard"));
+        return shouldTryToCertifyDevice() && sIsGms 
+                && Arrays.stream(Thread.currentThread().getStackTrace())
+                    .anyMatch(elem -> elem.getClassName().toLowerCase()
+                        .contains("droidguard"));
     }
 
     public static void onEngineGetCertificateChain() {
         // Check stack for SafetyNet or Play Integrity
         if (isCallerSafetyNet() || sIsFinsky) {
-            Log.i(TAG, "Blocked key attestation sIsGms=" + sIsGms + " sIsFinsky=" + sIsFinsky);
+            dlog("Blocked key attestation sIsGms=" + sIsGms + " sIsFinsky=" + sIsFinsky);
             throw new UnsupportedOperationException();
         }
     }
