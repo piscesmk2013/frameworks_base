@@ -202,18 +202,18 @@ public class PixelPropsUtils {
                 if (was) return true;
 
                 dlog("Spoofing build for GMS");
-                // Alter build parameters to Nexus 5X for avoiding hardware attestation enforcement
+                // Alter build parameters to avoid hardware attestation enforcement
                 setBuildField("BRAND", "google");
-                setBuildField("PRODUCT", "bullhead");
-                setBuildField("MODEL", "Nexus 5X");
+                setBuildField("PRODUCT", "sailfish");
+                setBuildField("MODEL", "Pixel");
                 setBuildField("MANUFACTURER", "Google");
-                setBuildField("DEVICE", "bullhead");
-                setBuildField("FINGERPRINT", "google/bullhead/bullhead:8.0.0/OPR6.170623.013/4283548:user/release-keys");
-                setBuildField("ID", "OPR6.170623.013");
+                setBuildField("DEVICE", "sailfish");
+                setBuildField("FINGERPRINT", "google/sailfish/sailfish:8.1.0/OPM2.171019.029/4657601:user/release-keys");
+                setBuildField("ID", "OPM2.171019.029");
                 setBuildField("TYPE", "user");
                 setBuildField("TAGS", "release-keys");
-                setVersionField("DEVICE_INITIAL_SDK_INT", Build.VERSION_CODES.N);
-                setVersionField("SECURITY_PATCH", "2017-08-05");
+                setVersionField("DEVICE_INITIAL_SDK_INT", Build.VERSION_CODES.O_MR1);
+                setVersionField("SECURITY_PATCH", "2018-04-05");
                 return true;
             }
         }
