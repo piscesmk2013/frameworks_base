@@ -203,17 +203,16 @@ public class PixelPropsUtils {
 
                 dlog("Spoofing build for GMS");
                 // Alter build parameters to avoid hardware attestation enforcement
-                setBuildField("BRAND", "google");
-                setBuildField("PRODUCT", "sailfish");
-                setBuildField("MODEL", "Pixel");
-                setBuildField("MANUFACTURER", "Google");
-                setBuildField("DEVICE", "sailfish");
-                setBuildField("FINGERPRINT", "google/sailfish/sailfish:8.1.0/OPM2.171019.029/4657601:user/release-keys");
-                setBuildField("ID", "OPM2.171019.029");
+                setBuildField("BRAND", "NVIDIA");
+                setBuildField("PRODUCT", "foster_e");
+                setBuildField("MODEL", "SHIELD Android TV");
+                setBuildField("MANUFACTURER", "NVIDIA");
+                setBuildField("DEVICE", "foster");
+                setBuildField("FINGERPRINT", "NVIDIA/foster_e/foster:7.0/NRD90M/2427173_1038.2788:user/release-keys");
+                setBuildField("ID", "NRD90M");
                 setBuildField("TYPE", "user");
                 setBuildField("TAGS", "release-keys");
-                setVersionField("DEVICE_INITIAL_SDK_INT", Build.VERSION_CODES.O_MR1);
-                setVersionField("SECURITY_PATCH", "2018-04-05");
+                setVersionField("SECURITY_PATCH", "2018-01-05");
                 return true;
             }
         }
