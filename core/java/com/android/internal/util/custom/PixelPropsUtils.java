@@ -211,6 +211,11 @@ public class PixelPropsUtils {
             Log.e(TAG, "Failed to register task stack listener!", e);
             spoofBuildGms();
         }
+        if (shouldCertify[0]) {
+            try {
+                ActivityTaskManager.getService().unregisterTaskStackListener(taskStackListener); // this will be registered on next query
+            } catch (Exception e) {}
+        }
         return shouldCertify[0];
     }
 
