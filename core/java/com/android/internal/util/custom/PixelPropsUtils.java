@@ -231,6 +231,12 @@ public class PixelPropsUtils {
         setBuildField("FINGERPRINT", sCertifiedProps[6]);
         setBuildField("TYPE", sCertifiedProps[7].isEmpty() ? "user" : sCertifiedProps[7]);
         setBuildField("TAGS", sCertifiedProps[8].isEmpty() ? "release-keys" : sCertifiedProps[8]);
+        if (!sCertifiedProps[9].isEmpty()) {
+            setVersionFieldString("SECURITY_PATCH", sCertifiedProps[9]);
+        }
+        if (!sCertifiedProps[10].isEmpty() && sCertifiedProps[10].matches("\\d+")) {
+            setVersionFieldInt("DEVICE_INITIAL_SDK_INT", Integer.parseInt(sCertifiedProps[10]));
+        }
     }
 
     public static void setProps(String packageName) {
@@ -323,15 +329,26 @@ public class PixelPropsUtils {
         }
     }
 
-    private static void setVersionField(String key, Object value) {
+    private static void setVersionFieldInt(String key, int value) {
         try {
-            if (DEBUG) Log.d(TAG, "Defining version field " + key + " to " + value.toString());
+            dlog("Defining version field " + key + " to " + value);
             Field field = Build.VERSION.class.getDeclaredField(key);
             field.setAccessible(true);
             field.set(null, value);
             field.setAccessible(false);
         } catch (NoSuchFieldException | IllegalAccessException e) {
-            Log.e(TAG, "Failed to set version field " + key, e);
+            Log.e(TAG, "Failed to spoof Build." + key, e);
+        }
+    }
+
+    private static void setVersionFieldString(String key, String value) {
+        try {
+            Field field = Build.VERSION.class.getDeclaredField(key);
+            field.setAccessible(true);
+            field.set(null, value);
+            field.setAccessible(false);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            Log.e(TAG, "Failed to spoof Build." + key, e);
         }
     }
 
