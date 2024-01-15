@@ -173,8 +173,4 @@
     <bool name="allow_clear_initial_attach_data_profile">false</bool>
     <java-symbol type="bool" name="allow_clear_initial_attach_data_profile" />
 
-    <!-- To disable the AOSP DSDA logic and use only QTI specific logic-->
-    <bool name="config_disable_aosp_dsda_logic">true</bool>
-    <java-symbol type="bool" name="config_disable_aosp_dsda_logic" />
-
 </resources>
